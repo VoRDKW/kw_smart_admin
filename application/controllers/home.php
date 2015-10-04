@@ -21,6 +21,5 @@ class home extends CI_Controller {
         }  else {
             redirect('http://localhost/kw_smart/');
         }
-    }
-
+    }  
 }

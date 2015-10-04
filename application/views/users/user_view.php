@@ -1,8 +1,83 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+<script>
+    jQuery(document).ready(function ($) {
+        $("#SidebarMenu ul li").removeAttr('class');
+        $("#btnUser").addClass("active");
+    });
+</script>
+<div class="container-fluid">
+    <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <a href="<?= base_url('user/add') ?>" class="btn btn-success btn-lg "><i class="fa fa-lg fa-user-plus"></i>&nbsp;เพิ่มผู้ใช้ระบบ</a>              
+            </div>
+            <div class="page-header">
+                <h2>ผู้ใช้งานระบบ<small>Subtext for header</small></h2>                
+            </div>
+        </div>
+    </div>
+    <div class="row">  
+        <div class="col-md-12">       
+            <form class="navbar-form right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="ค้นหาสมาชิก">
+                </div>
+                <button type="submit" class="btn btn-default">ค้นหา</button>
+            </form>
+        </div>
+        </div>
+    <div class="row">        
+        
+        <div class="col-md-12">
+            <table class="table table-hover table-bordered center">
+                <thead>
+                <th>เลขประจำตัว</th>
+                <th>ชื่อ-นามสกุล</th>
+                <th>จัดการ</th>               
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
+                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
+                        </td>                                   
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
+                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
+                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
+                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
+                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
+                        </td>
+                    </tr>
+                </tbody>                           
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,3 +1,8 @@
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
 <div class="modal fade bs-example-modal-sm" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -87,6 +92,10 @@
         }
     });
 </script>
+<!-- Morris Charts JavaScript -->
+<?php echo js('/plugins/morris/raphael.min.js?v=' . $version); ?>
+<?php echo js('/plugins/morris/morris.min.js?v=' . $version); ?>
+<?php echo js('/plugins/morris/morris-data.js?v=' . $version); ?>
 
 </body>
 </html>
