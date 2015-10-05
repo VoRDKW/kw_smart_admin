@@ -13,9 +13,19 @@ Class UserModel extends CI_Model {
 //            'readonly' => '',
 //            'class' => 'form-control'
 //        );
+        $i_PersonalID = array(
+            'name' => 'PersonalID',
+            'value' => set_value('PersonalID'),
+            'placeholder' => 'รหัสประจำตัวประชาชน',
+            'class' => 'form-control'
+        );
 
+        
         $form_add = array(
-            'form' => form_open('user/add/', array('class' => 'form-horizontal', 'id' => 'form_station')),
+            'form_open' => form_open('user/add/', array('class' => 'form-horizontal', 'id' => 'form_user')),
+            'PersonalID' => form_input($i_PersonalID),
+            
+            'form_close'=>  form_close(),
         );
         
 
@@ -33,7 +43,7 @@ Class UserModel extends CI_Model {
 //        );
 
         $form_edit = array(
-            'form' => form_open('user/edit/', array('class' => 'form-horizontal', 'id' => 'form_station')),
+            'form' => form_open('user/edit/', array('class' => 'form-horizontal', 'id' => 'form_user')),
         );
 
         return $form_edit;
