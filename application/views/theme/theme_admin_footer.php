@@ -10,13 +10,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="modal-title">Confirm</h4>
             </div>
-            <div class="modal-body" id="modal-body">
-                <div class="col-md-12">
-                    <div class="modal-body-title">
-
-                    </div>                    
-                </div>
-                <div class="col-md-12">
+            <div class="modal-body" id="modal-body" style="padding: 2% auto">             
+                <div class="col-md-12 center">
                     <div class="modal-body-content">
 
                     </div>                    
@@ -54,8 +49,10 @@
         var url = '<?= base_url() ?>' + $(e.relatedTarget).data('href');
 
         $('.modal-title').html('<i class="fa fa-info-circle fa-lg"></i> คุณต้องการ <strong>' + title + '</strong>');
-        $('.modal-body-title').html('<strong>' + sub_title + '</strong> : ' + info + '');
-        $('.modal-body-content').html(content);
+        
+        if (content !== "") {
+            $('.modal-body-content').html(content);
+        }
         if (id === 1) //edit
         {
             $('#btn_yes').show();

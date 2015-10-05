@@ -25,9 +25,28 @@
                 <button type="submit" class="btn btn-default">ค้นหา</button>
             </form>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object" src="..." alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Middle aligned media</h4>
+                    <div class="col-md-12">
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     <div class="row">        
-        
+
         <div class="col-md-12">
             <table class="table table-hover table-bordered center">
                 <thead>

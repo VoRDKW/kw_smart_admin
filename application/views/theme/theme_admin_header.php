@@ -29,6 +29,7 @@
         <?php //echo css('site.min.css?v=' . $version); ?>
         <?php echo css('sb-admin.css?v=' . $version); ?>
         <?php echo css('/plugins/morris.css?v=' . $version); ?>
+        <?php echo css('custom_style.css?v=' . $version)?>
         <!-- js -->
         <?php echo js('jquery.js?v=' . $version); ?>
         <?php echo js('site.min.js?v=' . $version); ?>
@@ -173,10 +174,10 @@
                             <a href="javascript:;" data-toggle="collapse" data-target="#MaintenanceMenu"><i class="fa fa-fw fa-laptop"></i>&nbsp;แจ้งซ่อมบำรุงคอมพิวเตอร์<i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="MaintenanceMenu" class="collapse">
                                 <li>
-                                    <a href="#">งานของฉัน</a>
+                                    <a href="<?= base_url('maintenance/') ?>">งานของฉัน</a>
                                 </li>
                                 <li>
-                                    <a href="#">ประวัติซ่อมบำรุง</a>
+                                    <a href="<?= base_url('maintenance/history') ?>">ประวัติซ่อมบำรุง</a>
                                 </li>
                             </ul>
                         </li>
