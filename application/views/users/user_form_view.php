@@ -4,6 +4,17 @@
         $("#btnUser").addClass("active");
     });
 </script>
+
+<!--<div class="form-group <? (form_error('VTID')) ? 'has-error' : '' ?>">                                  
+                                <label for="" class="col-sm-4 control-label">ประเภทรถ</label>
+                                <div class="col-sm-4">
+                                    <?php //echo $form['VTID'] ?>
+                                </div>  
+                                <div class="col-sm-4">
+                                    <?php //echo form_error('VTID', '<font color="error">', '</font>'); ?>
+                                </div>
+                            </div>-->
+
 <div class="container-fluid">
     <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
     <div class="row">

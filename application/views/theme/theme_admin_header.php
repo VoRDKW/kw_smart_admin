@@ -20,13 +20,13 @@
         <?php echo js('pace.min.js?v=' . $version); ?>
 
         <?php echo css('bootstrap.css?v=' . $version); ?>
-        <?php echo css('bootflat.min.css?v=' . $version); ?>
+        <?php //echo css('bootflat.min.css?v=' . $version); ?>
         <?php echo css('pace.css?v=' . $version); ?>
         <?php echo css('label.min.css?v=' . $version); ?>
         <?php echo css('segment.min.css?v=' . $version); ?>
         <?php echo css('font-awesome.css?v=' . $version); ?>
         <?php echo css('animate.css?v=' . $version); ?>
-        <?php echo css('site.min.css?v=' . $version); ?>
+        <?php //echo css('site.min.css?v=' . $version); ?>
         <?php echo css('sb-admin.css?v=' . $version); ?>
         <?php echo css('/plugins/morris.css?v=' . $version); ?>
         <!-- js -->

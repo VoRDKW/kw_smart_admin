@@ -28,9 +28,16 @@ class user extends CI_Controller {
     }
     
     public function add(){
+              
          $data = array(
-                'MemberID' => $_SESSION['MemberID']
-            );
+            'page_title' => 'เพิ่มและแก้ไขจุดจอด',
+            'page_title_small' => '',
+            //'form' => $this->m_station->set_form_edit($rcode, $vtid),
+            //'' => ,
+            //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
+            //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
+        );
+         
             $this->TemplateModel->set_Debug($data);
             $this->TemplateModel->set_Content('users/user_form_view', $data);
             $this->TemplateModel->ShowTemplate();
