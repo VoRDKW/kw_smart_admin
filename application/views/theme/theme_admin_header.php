@@ -60,7 +60,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">ระบบแจ้งซ่อมบำรุ่งคอมพิวเตอร์</a>
+                    <a class="navbar-brand" href="index.html">ระบบแจ้งซ่อมบำรุงคอมพิวเตอร์</a>
                 </div>
                 <!-- Top Menu Items -->
                 <ul class="nav navbar-right top-nav">
@@ -180,8 +180,8 @@
                                 </li>
                             </ul>
                         </li>
-                         <li id="btn">
-                            <a href="<?= base_url('user/') ?>"><i class="fa fa-fw fa-institution"></i>&nbsp;อาคารสถานที่</a>
+                         <li id="btnBuilding">
+                            <a href="<?= base_url('building/') ?>"><i class="fa fa-fw fa-institution"></i>&nbsp;อาคารสถานที่</a>
                         </li>
                          <li id="btnUser">
                             <a href="<?= base_url('user/') ?>"><i class="fa fa-fw fa-users"></i>&nbsp;ผู้ใช้งานระบบ</a>

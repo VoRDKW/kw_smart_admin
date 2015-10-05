@@ -1,7 +1,7 @@
 <script>
     jQuery(document).ready(function ($) {
         $("#SidebarMenu ul li").removeAttr('class');
-        $("#btnUser").addClass("active");
+        $("#btnBuilding").addClass("active");
     });
 </script>
 
@@ -19,7 +19,7 @@
     <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">เพิ่ม/แก้ไข ผู้ใช้งานระบบ</h1>            
+            <h1 class="page-header"><?=$page_title?></h1>            
         </div>
     </div>
     <div class="row">
