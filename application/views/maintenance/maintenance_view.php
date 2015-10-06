@@ -13,6 +13,16 @@
         <div class="col-md-12">
             <h2 class="page-header"><?= $page_title ?><small><?= $page_title_small ?></small></h2>            
         </div>
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"></h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
