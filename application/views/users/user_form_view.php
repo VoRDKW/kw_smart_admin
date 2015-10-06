@@ -104,7 +104,9 @@
             );
             echo anchor('#', '<span class="fa fa-save">&nbsp;&nbsp;บันทึก</span>', $save)."&nbsp;";
             echo anchor("/user", '<i class="fa fa-lg fa-times"></i>&nbsp;ยกเลิก', array("class" => "btn btn-danger btn-lg"))
-            ?>
+            
+                    ?>
+            
         </div>
         <?= $form['form_close'] ?>
     </div>

@@ -15,13 +15,14 @@ class user extends CI_Controller {
         parent::__construct();
 
         $this->load->model('usermodel');
+        $this->load->library('form_validation');
+        $this->load->helper('form');
     }
 
     public function index() {
         $data = array(
             'page_title' => 'ผู้ใช้งานระบบ',
             'page_title_small' => '',
-            
                 //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
                 //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
         );
@@ -31,10 +32,10 @@ class user extends CI_Controller {
     }
 
     public function add() {
-        $data_debug['validation_form'] = $this->usermodel->validation_form();
-       // $data_debug['run'] = $this->form_validation->run();
-        if ($data_debug['validation_form']) {
-            $data_debug['test2'] = $this->usermodel->get_post_form_add();       
+        $data_debug['validation_form'] = $this->usermodel->set_validation();
+        $data_debug['run'] = FALSE;
+        if ($data_debug['validation_form'] && $this->form_validation->run() == TRUE) {
+            $data_debug['test2'] = $this->usermodel->get_post_form_add();
         }
         $data = array(
             'page_title' => 'เพิ่มผู้ใช้งาน',
@@ -58,6 +59,7 @@ class user extends CI_Controller {
                 //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
                 //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
         );
+        
         $this->TemplateModel->set_Debug($data);
         $this->TemplateModel->set_Content('users/user_form_view', $data);
         $this->TemplateModel->ShowTemplate();

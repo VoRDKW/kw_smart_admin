@@ -65,7 +65,7 @@ Class UserModel extends CI_Model {
 
 
         $form_add = array(
-            'form_open' => form_open('user/add/', array('class' => 'form-horizontal', 'id' => 'form_user')),
+            'form_open' => form_open(base_url('user/add/'), array('class' => 'form-horizontal', 'id' => 'form_user')),
             'PersonalID' => form_input($i_PersonalID),
             'Username' => form_input($i_Username),
             'Password' => form_input($i_Password),
@@ -81,8 +81,6 @@ Class UserModel extends CI_Model {
 
         return $form_add;
     }
-
-  
 
     public function get_post_form_add() {
         $form_data = array(
@@ -115,9 +113,8 @@ Class UserModel extends CI_Model {
 
         return $form_edit;
     }
-    
-    
-    public function validation_form() {
+
+    public function set_validation() {
         $this->form_validation->set_rules('PersonalID', 'รหัสประจำตัวประชาชน', 'trim|required');
         $this->form_validation->set_rules('Usename', 'ชื่อผู้ใช้', 'trim|required');
         $this->form_validation->set_rules('Password', 'รหัสผ่าน', 'trim|required');
@@ -127,12 +124,7 @@ Class UserModel extends CI_Model {
         $this->form_validation->set_rules('Email', 'อีเมล', 'trim|required');
         $this->form_validation->set_rules('RoleID', 'สถานะผู้ใช้', 'trim|required');
         $this->form_validation->set_rules('ImageName', 'รูปภาพ', 'trim');
-        
-        if ($this->form_validation->run()) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
+        return TRUE;
     }
 
 }
