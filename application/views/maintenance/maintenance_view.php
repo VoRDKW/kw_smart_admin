@@ -16,10 +16,20 @@
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title"></h3>
+                    <h3 class="panel-title">หัวข้อ :</h3>                   
                 </div>
                 <div class="panel-body">
-                    Panel content
+                    <div class="col-md-9">
+
+                    </div>
+                    <div class="col-md-3">
+                        <p>สถานะ : ใหม่</p>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="right">
+                            <button class="btn btn-success" type="submit">ซ่อมเดี๋ยวนี้</button>                        
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

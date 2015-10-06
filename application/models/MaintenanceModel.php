@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 Class MaintenanceModel extends CI_Model {
 
-    public function set_form_add_maintenace() {
+    public function set_form_add() {
         $i_JobName = array(
             'name' => 'JobName',
             'value' => set_value('JobName'),
@@ -29,12 +29,15 @@ Class MaintenanceModel extends CI_Model {
             'type' => 'file',
             'value' => set_value('ImageName'),
             'placeholder' => '',
-            'class' => ''
+            'class' => '',
+            'id' => 'files',
+            'multiple' => 'multiple'
         );
         $i_JobDetail = array(
             'name' => 'JobDetail',
             'value' => set_value('JobDetail'),
             'placeholder' => '',
+            'rows' => '3',
             'class' => 'form-control'
         );
         $i_Note = array(
@@ -53,13 +56,28 @@ Class MaintenanceModel extends CI_Model {
             'Note' => form_input($i_Note),
             'form_close' => form_close(),
         );
+
+        return $form_add;
     }
 
-    public function set_form_edit_maintenace($JobID) {
-        
+    public function set_form_edit($data) {
+
+//        $i_Destination = array(
+//            'name' => 'Destination',
+//            'placeholder' => 'ปลายทาง',
+//            'readonly' => '',
+//            'class' => 'form-control text-center',
+//            'value' => $desination
+//        );
+
+        $form_edit = array(
+            'form' => form_open('user/edit/', array('class' => 'form-horizontal', 'id' => 'form_user')),
+        );
+
+        return $form_edit;
     }
 
-    public function get_post_form_maintenace() {
+    public function get_post_form() {
         $form_data = array(
             "JobName" => $this->input->post('JobName'),
             "RoomNo" => $this->input->post('RoomNo'),
@@ -78,6 +96,8 @@ Class MaintenanceModel extends CI_Model {
         $this->form_validation->set_rules('ImageName', 'รูปภาพ', 'trim|required');
         $this->form_validation->set_rules('JobDetail', 'ปัญหาที่แจ้ง', 'trim|required');
         $this->form_validation->set_rules('Note', 'หมายเหตุ', 'trim|required');
+
+        return TRUE;
     }
 
 }

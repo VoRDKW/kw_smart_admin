@@ -33,7 +33,7 @@ class maintenance extends CI_Controller {
         $data = array(
             'page_title' => 'เพิ่มงานซ่อมบำรุง',
             'page_title_small' => '',
-                //'form' => $this->m_station->set_form_edit($rcode, $vtid),
+                'form' => $this->maintenancemodel->set_form_add(),
                 //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
                 //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
         );

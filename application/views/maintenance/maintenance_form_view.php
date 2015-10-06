@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <form class="form-horizontal">
                 <div class="form-group">
                     <label>หัวข้อ :</label>
@@ -30,11 +30,6 @@
                     <?php echo form_error('NumberKWDevice', '<font color="error">', '</font>'); ?>           
                 </div>
                 <div class="form-group">
-                    <label>แนบรูปภาพ :</label>
-                    <?= $form['ImageName'] ?>
-                    <?php echo form_error('ImageName', '<font color="error">', '</font>'); ?>           
-                </div>
-                <div class="form-group">
                     <label>ปัญหาที่แจ้ง :</label>
                     <?= $form['JobDetail'] ?>
                     <?php echo form_error('JobDetail', '<font color="error">', '</font>'); ?>           
@@ -43,9 +38,36 @@
                     <label>หมายเหตุ :</label>
                     <?= $form['Note'] ?>
                     <?php echo form_error('Note', '<font color="error">', '</font>'); ?>           
+                </div>                
+                <div class="form-group right">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-check"></i>เพิ่มงาน</button>
+                    <button class="btn btn-danger" type="reset"><i class="fa fa-fw fa-times"></i>ยกเลิก</button>
                 </div>
+            </form>
+        </div>
+        <div class="col-md-6"
+             <form class="form-horizontal">                 
+                <div class="form-group">
+                    <label>แนบรูปภาพ :</label>
+                    <?= $form['ImageName'] ?>
+                    <?php echo form_error('ImageName', '<font color="error">', '</font>'); ?>           
+                </div>
+                <img id="image"class="img-responsive"/>
             </form>
         </div>
     </div>
 </div>
+<script>
+    document.getElementById("files").onchange = function () {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            document.getElementById("image").src = e.target.result;
+        };
+
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
+    };
+</script>
 
