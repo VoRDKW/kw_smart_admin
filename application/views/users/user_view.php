@@ -4,98 +4,51 @@
         $("#btnUser").addClass("active");
     });
 </script>
+
 <div class="container-fluid">
     <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
     <div class="row">
-        <div class="col-md-12">
-            <div class="pull-right">
-                <a href="<?= base_url('user/add') ?>" class="btn btn-success btn-lg "><i class="fa fa-lg fa-user-plus"></i>&nbsp;เพิ่มผู้ใช้ระบบ</a>              
-            </div>
-            <div class="page-header">
-                <h2>ผู้ใช้งานระบบ<small>Subtext for header</small></h2>                
-            </div>
+        <div class="pull-right">
+            <a href="<?= base_url('user/add') ?>" class="btn btn-success btn-lg "><i class="fa fa-lg fa-user-plus"></i>&nbsp;เพิ่มผู้ใช้งานระบบ</a>              
         </div>
-    </div>
-    <div class="row">  
-        <div class="col-md-12">       
-            <form class="navbar-form right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="ค้นหาสมาชิก">
-                </div>
-                <button type="submit" class="btn btn-default">ค้นหา</button>
-            </form>
+        <div class="col-md-12">
+            <h2 class="page-header"><?= $page_title ?><small><?= $page_title_small ?></small></h2>            
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="media">
-                <div class="media-left media-middle">
-                    <a href="#">
-                        <img class="media-object" src="..." alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">Middle aligned media</h4>
-                    <div class="col-md-12">
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">        
-
-        <div class="col-md-12">
-            <table class="table table-hover table-bordered center">
+            <table class=" table table-hover">
                 <thead>
-                <th>เลขประจำตัว</th>
-                <th>ชื่อ-นามสกุล</th>
-                <th>จัดการ</th>               
+                    <tr>
+                        <th style="width: 15%">Username</th>
+                        <th style="width: 15%">รหัสประจำตัวประชาชน</th>
+                        <th style="width: 20%">E-mail</th>
+                        <th style="width: 20%">ชื่อ-นามสกุล</th>
+                        <th style="width: 15%">เข้าใช้งานล่าสุด</th>
+                        <th style="width: 15%"></th>
+                    </tr>
                 </thead>
                 <tbody>
+                    <?php 
+                    foreach ($data as $user) { 
+                        $MemberID = $user['MemberID'];
+                    ?>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
-                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
-                        </td>                                   
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
-                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
+                        <td class="text-center"><?=$user['UserName']?></td>
+                        <td class="text-center"><?=$user['PersonalID']?></td>
+                        <td class="text-center"><?=$user['Email']?></td>
+                        <td><?=$user['Fname'].' '.$user['Lname']?></td>
+                        <td class="text-center"><?=$user['LastLogin']?></td>
+                        <td class="text-center">
+                           
+                            <a href="<?=  base_url("user/edit/$MemberID")?>" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                            &nbsp;
+                            <a href="<?=  base_url("user/")?>" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>
+                            
                         </td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
-                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
-                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#"><i class="fa fa-fw  fa-pencil"></i></a>
-                            <a href="#"><i class="fa fa-fw  fa-times"></i></a>
-                        </td>
-                    </tr>
-                </tbody>                           
+                    <?php } ?>
+                </tbody>
             </table>
         </div>
     </div>

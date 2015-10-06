@@ -13,29 +13,39 @@ class user extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-
         $this->load->model('usermodel');
-        $this->load->library('form_validation');
-        $this->load->helper('form');
     }
 
     public function index() {
         $data = array(
             'page_title' => 'ผู้ใช้งานระบบ',
             'page_title_small' => '',
+            'data' => $this->usermodel->get_user()
                 //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
                 //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
         );
-        $this->TemplateModel->set_Debug($data);
+        //$this->TemplateModel->set_Debug($data);
         $this->TemplateModel->set_Content('users/user_view', $data);
         $this->TemplateModel->ShowTemplate();
     }
 
     public function add() {
-        $data_debug['validation_form'] = $this->usermodel->set_validation();
-        $data_debug['run'] = FALSE;
-        if ($data_debug['validation_form'] && $this->form_validation->run() == TRUE) {
-            $data_debug['test2'] = $this->usermodel->get_post_form_add();
+        $data_debug = array();
+        if ($this->usermodel->set_validation_form()) {
+            $form_data = $this->usermodel->get_form_post();
+            $rs = $this->usermodel->insert_user($form_data);
+            if ($rs) {
+                $alert['alert_message'] = "บันทึกข้อมูลสำเร็จ";
+                $alert['alert_mode'] = "success";
+            } else {
+                $alert['alert_message'] = "บันทึกข้อมูลผิดพลาด";
+                $alert['alert_mode'] = "danger";
+            }
+            $this->session->set_flashdata('alert', $alert);
+            redirect('user/');
+
+            $data_debug['form_data'] = $form_data;
+            $data_debug['rs'] = $rs;
         }
         $data = array(
             'page_title' => 'เพิ่มผู้ใช้งาน',
@@ -50,17 +60,40 @@ class user extends CI_Controller {
         $this->TemplateModel->ShowTemplate();
     }
 
-    public function edit() {
+    public function edit($MemberID) {
+        $user_data = $this->usermodel->get_user($MemberID);
+        if ($user_data == NULL) {
+            redirect('user');
+        }
+
+        $data_debug = array();
+        if ($this->usermodel->set_validation_form()) {
+            $form_data = $this->usermodel->get_form_post();
+            $rs = $this->usermodel->update_user($MemberID, $form_data);
+
+            if ($rs) {
+                $alert['alert_message'] = "บันทึกข้อมูลสำเร็จ";
+                $alert['alert_mode'] = "success";
+            } else {
+                $alert['alert_message'] = "บันทึกข้อมูลผิดพลาด";
+                $alert['alert_mode'] = "danger";
+            }
+            $this->session->set_flashdata('alert', $alert);
+            redirect('user/');
+
+            $data_debug['form_data'] = $form_data;
+            $data_debug['rs'] = $rs;
+        }
+
         $data = array(
             'page_title' => 'แก้ไขผู้ใช้งาน',
             'page_title_small' => '',
-                //'form' => $this->m_station->set_form_edit($rcode, $vtid),
-                //'' => ,
+            'form' => $this->usermodel->set_form_edit($MemberID, $user_data),
                 //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
                 //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
         );
-        
-        $this->TemplateModel->set_Debug($data);
+
+        //$this->TemplateModel->set_Debug($data);
         $this->TemplateModel->set_Content('users/user_form_view', $data);
         $this->TemplateModel->ShowTemplate();
     }

@@ -11,28 +11,36 @@ Class TemplateModel extends CI_Model {
     private $lang_value = array('theme');
     private $version = '1.0';
     
+    
     function set_RealAlert($data) {
         $this->real_alert = $data;
     }
+
     function set_Debug($data) {
         $this->debud_data = $data;
     }
+
     function set_Title($name) {
         $this->title = $name . ' | ' . $this->title;
     }
+
     function set_Content($name, $data) {
         $this->view_name = $name;
         $this->set_data = $data;
     }
+
     function set_Permission($mode) {
         $this->permission = $mode;
     }
+
     function check_Alert() {
         return $this->session->flashdata('alert');
     }
+
     function check_RealAlert() {
         return $this->real_alert;
     }
+    
     function ShowTemplate() {
         //--- Load language --//
         $site_lang = $this->session->userdata('site_lang');
