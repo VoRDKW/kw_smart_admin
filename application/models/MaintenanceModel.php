@@ -10,11 +10,24 @@ Class MaintenanceModel extends CI_Model {
             'name' => 'JobName',
             'value' => set_value('JobName'),
             'placeholder' => '',
+            'size' => '5',
+            'class' => 'form-control'
+        );
+        $i_BuildingID = array(
+            'name' => 'BuildingID',
+            'value' => set_value('BuildingID'),
+            'placeholder' => '',
             'class' => 'form-control'
         );
         $i_RoomNo = array(
             'name' => 'RoomNo',
             'value' => set_value('RoomNo'),
+            'placeholder' => '',
+            'class' => 'form-control'
+        );
+        $i_Floor = array(
+            'name' => 'Floor',
+            'value' => set_value('Floor'),
             'placeholder' => '',
             'class' => 'form-control'
         );
@@ -49,7 +62,9 @@ Class MaintenanceModel extends CI_Model {
         $form_add = array(
             'form_open' => form_open('building/add/', array('class' => 'form-horizontal', 'id' => 'frm_building')),
             'JobName' => form_input($i_JobName),
+            'BuildingID' => form_input($i_BuildingID),
             'RoomNo' => form_input($i_RoomNo),
+            'Floor' => form_input($i_Floor),
             'NumberKWDevice' => form_input($i_NumberKWDevice),
             'ImageName' => form_input($i_ImageName),
             'JobDetail' => form_textarea($i_JobDetail),

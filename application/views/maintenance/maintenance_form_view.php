@@ -12,62 +12,80 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label>หัวข้อ :</label>
-                    <?= $form['JobName'] ?>
-                    <?php echo form_error('JobName', '<font color="error">', '</font>'); ?>           
+        <form class="form-horizontal">
+            <div class="col-md-12">
+                <div class="form-group <?= (form_error('JobName')) ? 'has-error' : '' ?>">
+                    <label class="col-md-2 control-label">หัวข้อ :</label>
+                    <div class="col-md-8">
+                        <?= $form['JobName'] ?>
+                        <?php echo form_error('JobName', '<font color="error">', '</font>'); ?>
+                    </div>    
                 </div>
-                <div class="form-group">
-                    <label>สถานที่ :</label>
-                    <?= $form['RoomNo'] ?>
-                    <?php echo form_error('RoomNo', '<font color="error">', '</font>'); ?>           
-                </div>
-                <div class="form-group">
-                    <label>เลขที่กว. :</label>
-                    <?= $form['NumberKWDevice'] ?>
-                    <?php echo form_error('NumberKWDevice', '<font color="error">', '</font>'); ?>           
-                </div>
-                <div class="form-group">
-                    <label>ปัญหาที่แจ้ง :</label>
-                    <?= $form['JobDetail'] ?>
-                    <?php echo form_error('JobDetail', '<font color="error">', '</font>'); ?>           
-                </div>
-                <div class="form-group">
-                    <label>หมายเหตุ :</label>
-                    <?= $form['Note'] ?>
-                    <?php echo form_error('Note', '<font color="error">', '</font>'); ?>           
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-offset-1 col-md-3">
+                            <div class="form-group <?= (form_error('Building')) ? 'has-error' : '' ?>">
+                                <label class="col-md-3">อาคาร :</label>
+                                <div class="col-md-9">
+                                    <?= $form['BuildingID'] ?>
+                                    <?php echo form_error('BuildingID', '<font color="error">', '</font>'); ?> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group <?= (form_error('RoomNo')) ? 'has-error' : '' ?>">
+                                <label class="col-md-3">ห้อง :</label>
+                                <div class="col-md-9">
+                                    <?= $form['RoomNo'] ?>
+                                    <?php echo form_error('RoomNo', '<font color="error">', '</font>'); ?> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group <?= (form_error('Floor')) ? 'has-error' : '' ?>">
+                                <label class="col-md-3">ชั้น :</label>
+                                <div class="col-md-9">
+                                    <?= $form['Floor'] ?>
+                                    <?php echo form_error('Floor', '<font color="error">', '</font>'); ?> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>                
+                <div class="form-group <?= (form_error('NumberKWDevice')) ? 'has-error' : '' ?>">
+                    <label class="col-md-2 control-label">เลขที่ กว. :</label>
+                    <div class="col-md-8">
+                        <?= $form['NumberKWDevice'] ?>
+                        <?php echo form_error('NumberKWDevice', '<font color="error">', '</font>'); ?>  
+                    </div>         
+                </div>
+                <div class="form-group <?= (form_error('JobDetail')) ? 'has-error' : '' ?>">
+                    <label class="col-md-2 control-label">ปัญหาที่แจ้ง :</label>
+                    <div class="col-md-8">
+                        <?= $form['JobDetail'] ?>
+                        <?php echo form_error('JobDetail', '<font color="error">', '</font>'); ?>   
+                    </div>        
+                </div>
+                <div class="form-group <?= (form_error('Note')) ? 'has-error' : '' ?>">
+                    <label class="col-md-2 control-label">หมายเหตุ :</label>
+                    <div class="col-md-8">
+                        <?= $form['Note'] ?>
+                        <?php echo form_error('Note', '<font color="error">', '</font>'); ?>
+                    </div>           
+                </div>   
+                <div class="form-group <?= (form_error('ImageName')) ? 'has-error' : '' ?>">
+                    <label class="col-md-2 control-label">แนบรูปภาพ :</label>
+                    <div class="col-md-10">
+                        <?= $form['ImageName'] ?>
+                        <?php echo form_error('ImageName', '<font color="error">', '</font>'); ?> 
+                    </div>          
+                </div>
                 <div class="form-group right">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-check"></i>เพิ่มงาน</button>
                     <button class="btn btn-danger" type="reset"><i class="fa fa-fw fa-times"></i>ยกเลิก</button>
                 </div>
-            </form>
-        </div>
-        <div class="col-md-6"
-             <form class="form-horizontal">                 
-                <div class="form-group">
-                    <label>แนบรูปภาพ :</label>
-                    <?= $form['ImageName'] ?>
-                    <?php echo form_error('ImageName', '<font color="error">', '</font>'); ?>           
-                </div>
-                <img id="image"class="img-responsive"/>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
-<script>
-    document.getElementById("files").onchange = function () {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            // get loaded data and render thumbnail.
-            document.getElementById("image").src = e.target.result;
-        };
-
-        // read the image file as a data URL.
-        reader.readAsDataURL(this.files[0]);
-    };
-</script>
 
