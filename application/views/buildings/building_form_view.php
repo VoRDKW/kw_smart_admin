@@ -40,7 +40,7 @@
         <div class="col-md-12 center">
                 <button  type="submit" class="btn btn-success">บันทึก</button>>
                 <a href="<?=  base_url("building")?>" type="reset" class="btn btn-danger">ยกเลิก</a>
-            </div>
+        </div>
         <?= $form['form_close'] ?>
     </div>
 </div>

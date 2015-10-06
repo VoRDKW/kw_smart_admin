@@ -97,22 +97,21 @@ class building extends CI_Controller {
     }
 
     public function add_room($BuildingID, $FloorNo) {
+
         $data_debug = array();
         if ($this->buildingmodel->set_validate_form_room()) {
             $form_data = $this->buildingmodel->get_post_form_room();
-
-            //$rs = $this->buildingmodel->insert_building($form_data);
-
-//            if ($rs) {
-//                $alert['alert_message'] = "บันทึกข้อมูลสำเร็จ";
-//                $alert['alert_mode'] = "success";
-//            } else {
-//                $alert['alert_message'] = "บันทึกข้อมูลผิดพลาด";
-//                $alert['alert_mode'] = "danger";
-//            }
-//            $this->session->set_flashdata('alert', $alert);
-            //redirect('building/');
-            $data_debug['form_data'] = $form_data;
+            $rs = $this->buildingmodel->insert_room($BuildingID, $form_data);
+            if ($rs) {
+                $alert['alert_message'] = "บันทึกข้อมูลสำเร็จ";
+                $alert['alert_mode'] = "success";
+            } else {
+                $alert['alert_message'] = "บันทึกข้อมูลผิดพลาด";
+                $alert['alert_mode'] = "danger";
+            }
+            $this->session->set_flashdata('alert', $alert);
+            redirect('building/');
+//            $data_debug['form_data'] = $form_data;
 //            $data_debug['rs']=$rs;
         }
 
@@ -129,7 +128,51 @@ class building extends CI_Controller {
     }
 
     public function edit_room($BuildingID, $RoomID) {
-        
+
+        $room = $this->buildingmodel->get_rooms($BuildingID, NULL, $RoomID);
+        if ($room == NULL) {
+            redirect('building/');
+        }
+        $data_debug = array();
+        if ($this->buildingmodel->set_validate_form_room()) {
+            $form_data = $this->buildingmodel->get_post_form_room($RoomID);
+            $rs = $this->buildingmodel->update_room($RoomID, $form_data);
+            if ($rs) {
+                $alert['alert_message'] = "บันทึกข้อมูลสำเร็จ";
+                $alert['alert_mode'] = "success";
+            } else {
+                $alert['alert_message'] = "บันทึกข้อมูลผิดพลาด";
+                $alert['alert_mode'] = "danger";
+            }
+            $this->session->set_flashdata('alert', $alert);
+            redirect('building/');
+//            $data_debug['form_data'] = $form_data;
+//            $data_debug['rs']=$rs;
+        }
+
+        $data = array(
+            'page_title' => 'แก้ไข ห้อง',
+            'page_title_small' => '',
+            'form' => $this->buildingmodel->set_form_edit_room($BuildingID, $RoomID, $room),
+                //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
+                //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
+        );
+        //$this->TemplateModel->set_Debug($room);
+        $this->TemplateModel->set_Content('buildings/building_room_form_view', $data);
+        $this->TemplateModel->ShowTemplate();
+    }
+
+    public function delete_room($RoomID) {
+        $rs = $this->buildingmodel->delete_room($RoomID);
+        if ($rs) {
+            $alert['alert_message'] = "ลบข้อมูลสำเร็จ";
+            $alert['alert_mode'] = "success";
+        } else {
+            $alert['alert_message'] = "ลบข้อมูลผิดพลาด";
+            $alert['alert_mode'] = "danger";
+        }
+        $this->session->set_flashdata('alert', $alert);
+        redirect('building/');
     }
 
 }

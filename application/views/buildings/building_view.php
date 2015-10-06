@@ -39,25 +39,34 @@
                             <?php
                             foreach ($building['Floors'] as $Floor) {
                                 $FloorNo = $Floor['FloorNo'];
+                                $rooms = $Floor['Rooms'];
                                 ?>
-
                                 <tr>
                                     <td colspan="3"><strong><?= $Floor['FloorName'] ?></strong></td>
                                     <td class="text-center">
                                         <a href="<?= base_url("building/add_room/$BuildingID/$FloorNo") ?>" class="btn btn-default btn-sm "><i class="fa fa-lg fa-plus-square-o"></i>&nbsp;ห้อง<?= $Floor['FloorName'] ?></a>                            
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="text-center">123</td>
-                                    <td>ชื่อห้อง</td>
-                                    <td class="text-center">30</td>
-                                    <td class="text-center">
-                                        <i class="fa fa-edit"/>
-                                        &nbsp;
-                                        <i class="fa fa-trash"/>
-                                    </td>
-                                </tr>
-                            <?php } ?>
+                                <?php
+                                if (count($rooms) > 0) {
+                                    foreach ($rooms as $room) {
+                                        $RoomID = $room['RoomID'];
+                                        ?>
+                                        <tr>
+                                            <td class="text-center"><?= $room['RoomNO'] ?></td>
+                                            <td><?= $room['RoomName'] ?></td>
+                                            <td class="text-center"><?= $room['NumberSeat'] ?></td>
+                                            <td class="text-center">
+                                                <a href="<?= base_url("building/edit_room/$BuildingID/$RoomID") ?>" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>                            
+                                                &nbsp;
+                                                <a href="<?= base_url("building/delete_room/$RoomID") ?>" class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>                          
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
                         </tbody>
                     </table>
                     <hr/>
