@@ -43,7 +43,19 @@ class maintenance extends CI_Controller {
     }
 
     public function edit() {
-        
+        $data = array (
+            
+        );
+        $data = array(
+            'page_title' => 'รายละเอียดงานแจ้งซ่อม',
+            'page_title_small' => '',
+                'form' => $this->maintenancemodel->set_form_edit(),
+                //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
+                //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
+        );
+        $this->TemplateModel->set_Debug($data);
+        $this->TemplateModel->set_Content('maintenance/maintenance_detail_view', $data);
+        $this->TemplateModel->ShowTemplate();
     }
 
     public function history() {
