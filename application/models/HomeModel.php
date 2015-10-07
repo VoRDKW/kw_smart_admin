@@ -6,10 +6,7 @@ if (!defined('BASEPATH'))
 class HomeModel extends CI_Model
 {
 	
-	public function 
-	{
-	
-	}
+
 }
 
 

@@ -10,16 +10,16 @@ class home extends CI_Controller {
 
     public function index() {
         $is_admin = $_SESSION['IsAdmin'];
-        $MemberID = $_SESSION['MemberID'];
-        if ($MemberID != NULL && $is_admin == TRUE) {
-            $data = array(
-                'MemberID' => $MemberID
-            );
-            $this->TemplateModel->set_Debug($data);
-            $this->TemplateModel->set_Content('home_view', $data);
-            $this->TemplateModel->ShowTemplate();
-        }  else {
-            redirect('http://localhost/kw_smart/');
+        if ($is_admin != TRUE) {
+            //          redirect('http://localhost/kw_smart/');
         }
-    }  
+        $data = array(
+            'IsAdmin' => $is_admin,
+            'MemberID' => $_SESSION['MemberID']
+        );
+        $this->TemplateModel->set_Debug($data);
+        $this->TemplateModel->set_Content('home_view', $data);
+        $this->TemplateModel->ShowTemplate();
+    }
+
 }
