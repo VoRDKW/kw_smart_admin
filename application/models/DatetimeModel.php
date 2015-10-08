@@ -31,6 +31,15 @@ Class DatetimeModel extends CI_Model {
         return $strYear . '-' . $strMonthThai . '-' . $strDay;
     }
 
+    public function set_th_date_to_db($date) {
+        //3 กันยายน 2558
+        $str = explode(' ', $date);
+        $strYear = trim($str[2]) - 543;
+        $strMonth = $this->monthTHtoDB($str[1]);
+        $strDay = $str[0];
+        return $strYear . '-' . $strMonth . '-' . $strDay;
+    }
+
     public function changeTHDBMonthToText($strDate) {
         $str = explode('-', $strDate);
         $strYear = $str[0];

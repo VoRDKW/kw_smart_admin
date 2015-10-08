@@ -34,6 +34,17 @@
         <?php echo js('jquery.js?v=' . $version); ?>
         <?php echo js('site.min.js?v=' . $version); ?>
 
+        <!--time picker-->    
+        <?php //echo css('bootstrap-timepicker.min.css?v=' . $version); ?>  
+        <?php //echo js('bootstrap-timepicker.min.js?v=' . $version); ?> 
+
+        <!--date picker-->    
+        <?php echo css('datepicker.css?v=' . $version); ?>         
+        <?php echo js('bootstrap-datepicker.js?v=' . $version); ?> 
+        <!-- thai extension -->
+        <?php echo js('bootstrap-datepicker-thai.js?v=' . $version); ?>  
+        <?php echo js('/locales/bootstrap-datepicker.th.js?v=' . $version); ?>  
+        
         <script type="text/javascript">
             $(window).scroll(function () {
                 if ($(this).scrollTop() > $(window).height() / 2) {

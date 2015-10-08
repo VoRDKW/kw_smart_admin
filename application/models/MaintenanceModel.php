@@ -11,15 +11,21 @@ Class MaintenanceModel extends CI_Model {
         $this->load->model('datetimemodel');
     }
 
-    private $JobStatusID = 0;
+    private $JobStatusID = NULL;
+    private $CreateDate = NUll;
 
     public function set_JobStatus($JobStatusID) {
         $this->JobStatusID = $JobStatusID;
     }
 
+    public function set_CreateDate($CreateDate) {
+        $this->CreateDate = $CreateDate;
+    }
+
     public function update_job($JobID, $data) {
         $data['UpdateDate'] = $this->datetimemodel->getDatetimeNow();
         $data['UpdateBy'] = $this->session->userdata('MemberID');
+
         $this->db->trans_begin();
         $this->db->where('JobID', $JobID);
         $this->db->update('tbm_jobs', $data);
@@ -34,7 +40,7 @@ Class MaintenanceModel extends CI_Model {
         return $rs;
     }
 
-    public function set_data_view($JobID = NULL) {
+    public function set_data_view() {
         $rs = array();
         $Jobs = $this->get_jobs();
         foreach ($Jobs as $Job) {
@@ -47,11 +53,17 @@ Class MaintenanceModel extends CI_Model {
     }
 
     public function get_jobs($JobID = NULL) {
-        $this->db->select('*,tbm_jobs.Note as Note');
+        $this->db->select('*,tbm_jobs.Note as Note,tbm_jobs.CreateDate as CreateDate');
         $this->db->join('tbm_room', 'tbm_room.RoomID=tbm_jobs.RoomID', 'LEFT');
         $this->db->join('building_has_room', 'tbm_room.RoomID = building_has_room.RoomID', 'LEFT');
         $this->db->join('tbm_building', 'tbm_building.BuildingID = building_has_room.BuildingID', 'LEFT');
         $this->db->join('tbm_job_status', 'tbm_job_status.JobStatusID = tbm_jobs.JobStatusID', 'LEFT');
+        if ($this->JobStatusID != NULL) {
+            $this->db->where('tbm_jobs.JobStatusID', $this->JobStatusID);
+        }
+        if ($this->CreateDate != NULL) {
+            $this->db->like('tbm_jobs.CreateDate', $this->CreateDate);
+        }
         if ($JobID != NULL) {
             $this->db->where('tbm_jobs.JobID', $JobID);
         }
@@ -66,7 +78,28 @@ Class MaintenanceModel extends CI_Model {
     }
 
     public function set_form_search() {
-        
+        $job_status = $this->get_job_status();
+        $i_JobStatusID = array();
+        $i_JobStatusID[0] = 'ทั้งหมด';
+        foreach ($job_status as $status) {
+            $i_JobStatusID[$status['JobStatusID']] = $status['JobStatusName'];
+        }
+
+        $i_CreateDate = array(
+            'name' => 'CreateDate',
+            'type' => 'text',
+            'value' => set_value('CreateDate'),
+            'class' => 'form-control datepicker'
+        );
+
+        $dropdown = ' class="form-control" '; //'class="selecter_3" data-selecter-options = \'{"cover":"true"}\' ';
+        $form = array(
+            'form_open' => form_open('maintenance/', array('class' => 'form-inline', 'id' => 'frm_search_job')),
+            'JobStatusID' => form_dropdown('JobStatusID', $i_JobStatusID, set_value('JobStatusID'), $dropdown . 'id = "JobStatusID" '),
+            'CreateDate' => form_input($i_CreateDate),
+            'form_close' => form_close()
+        );
+        return $form;
     }
 
     public function set_form_job_prove($JobID) {
@@ -96,6 +129,11 @@ Class MaintenanceModel extends CI_Model {
         $this->form_validation->set_rules('SolveDetail', 'ปัญหาที่แจ้ง', 'trim|required');
         $rs = $this->form_validation->run();
         return $rs;
+    }
+
+    public function get_job_status() {
+        $query = $this->db->get('tbm_job_status');
+        return $query->result_array();
     }
 
 }

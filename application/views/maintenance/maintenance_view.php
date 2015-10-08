@@ -2,6 +2,11 @@
     jQuery(document).ready(function ($) {
         $("#SidebarMenu ul li").removeAttr('class');
         $("#btnMaintenance").addClass("active");
+
+        $('.datepicker').datepicker({
+            language: 'th-th',
+            format: 'd MM yyyy'
+        });
     });
 </script>
 <div class="container-fluid">
@@ -11,7 +16,29 @@
             <h2 class="page-header"><?= $page_title ?><small><?= $page_title_small ?></small></h2>            
         </div>
         <div class="col-md-12">
-            
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-search"></i>&nbsp;
+                    ค้นหา
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12 text-center">
+                        <?= $form['form_open'] ?>
+                        <div class="form-group">
+                            <label for="">สถานะ : </label>
+                            <?= $form['JobStatusID'] ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="">&nbsp;วันที่ : </label>
+                            <?= $form['CreateDate'] ?>
+                        </div>
+
+                        <button type="submit" class="btn btn-default"><i class="fa fa-fw fa-search"></i>&nbspแสดงข้อมูล</button>
+                        <button type="reset" class="btn btn-default" value="Reset">ล้างข้อมูล</button>                
+                        <?= $form['form_close'] ?>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-12">
             <?php

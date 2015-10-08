@@ -18,14 +18,24 @@ class maintenance extends CI_Controller {
     }
 
     public function index() {
+        $data_debug = array();
+        if ($this->input->post('JobStatusID')) {
+            $this->maintenancemodel->set_JobStatus($this->input->post('JobStatusID'));
+        }
+        if ($this->input->post('CreateDate')) {
+            $CreateDate = $this->input->post('CreateDate');
+            $this->maintenancemodel->set_CreateDate($this->datetimemodel->set_th_date_to_db($CreateDate));
+        }
+
         $data = array(
             'page_title' => 'งานซ่อมบำรุงคอมพิวเตอร์',
             'page_title_small' => '',
+            'form' => $this->maintenancemodel->set_form_search(),
             'data' => $this->maintenancemodel->set_data_view(),
                 //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
                 //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
         );
-        $this->TemplateModel->set_Debug($data);
+        $this->TemplateModel->set_Debug($data_debug);
         $this->TemplateModel->set_Content('maintenance/maintenance_view', $data);
         $this->TemplateModel->ShowTemplate();
     }
