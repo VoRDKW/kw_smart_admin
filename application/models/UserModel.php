@@ -9,23 +9,31 @@ Class UserModel extends CI_Model {
         parent::__construct();
     }
 
-    public function get_user($MemberID=NULL){
-        
-        $this->db->join('tbm_positions','tbm_positions.PositionID = tbm_user.PositionID','left');
-        
-        if($MemberID!=NULL){
-            $this->db->where('MemberID',$MemberID);
+    public function get_user($MemberID = NULL) {
+
+        $this->db->join('tbm_positions', 'tbm_positions.PositionID = tbm_user.PositionID', 'left');
+
+        if ($MemberID != NULL) {
+            $this->db->where('MemberID', $MemberID);
         }
-         $query = $this->db->get('tbm_user');
+        $query = $this->db->get('tbm_user');
         if ($MemberID == NULL) {
             $rs = $query->result_array();
         } else {
             $rs = $query->row_array();
         }
-        
+
         return $rs;
     }
 
+    public function get_user_login() {
+        $this->db->join('tbm_images', 'tbm_user.ImageUserID = tbm_images.ImageID', 'left');
+        $this->db->join('tbm_positions', 'tbm_user.PositionID = tbm_positions.PositionID', 'left');
+        $this->db->where('MemberID', $this->session->userdata('MemberID'));
+        $query = $this->db->get('tbm_user');
+        $rs = $query->row_array();
+        return $rs;
+    }
 
     public function set_form_add() {
         $i_PersonalID = array(
@@ -94,7 +102,7 @@ Class UserModel extends CI_Model {
         return $form_add;
     }
 
-    public function set_form_edit($MemberID,$data) {
+    public function set_form_edit($MemberID, $data) {
         $i_PersonalID = array(
             'name' => 'PersonalID',
             'value' => $data['PersonalID'],
@@ -160,15 +168,15 @@ Class UserModel extends CI_Model {
 
         return $form_add;
     }
-    
+
     public function insert_user($data) {
 
-        
+
         $data['CreateDate'] = $this->DatetimeModel->getDatetimeNow();
         $data['CreateBy'] = $this->session->userdata('MemberID');
 
         $this->db->trans_begin();
-        $this->db->insert('tbm_user', $data);   
+        $this->db->insert('tbm_user', $data);
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
             $rs = FALSE;
@@ -177,17 +185,17 @@ Class UserModel extends CI_Model {
             $rs = TRUE;
         }
         return $rs;
-
     }
-    public function update_user($MemberID,$data) {
 
-        
+    public function update_user($MemberID, $data) {
+
+
         $data['UpdateDate'] = $this->DatetimeModel->getDatetimeNow();
         $data['UpdateBy'] = $name = $this->session->userdata('MemberID');
 
         $this->db->trans_begin();
-        $this->db->where('MemberID',$MemberID);
-        $this->db->update('tbm_user', $data);   
+        $this->db->where('MemberID', $MemberID);
+        $this->db->update('tbm_user', $data);
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
             $rs = FALSE;
@@ -196,9 +204,8 @@ Class UserModel extends CI_Model {
             $rs = TRUE;
         }
         return $rs;
-
     }
-    
+
     public function set_validation_form() {
         $this->form_validation->set_rules('PersonalID', 'รหัสประจำตัวประชาชน', 'trim|required');
         $this->form_validation->set_rules('UserName', 'ชื่อผู้ใช้', 'trim|required');
@@ -229,7 +236,7 @@ Class UserModel extends CI_Model {
             $img_id = $this->uploadmodel->upload_image('img_user', 'ImageUserID');
             //$form_data['ImageUserID'] = $img_id;
         }
-        return $form_data;   
+        return $form_data;
     }
 
 }

@@ -29,6 +29,27 @@ class user extends CI_Controller {
         $this->TemplateModel->ShowTemplate();
     }
 
+    public function view($MemberID = NULL) {
+        $data = array(
+            'page_title' => 'ข้อมูลผู้ใช้ระบบ',
+            'page_title_small' => '',
+            'data' => $this->usermodel->get_user_login(),
+                //'' => ,
+                //'previous_page' => 'route/time/' . $rcode . '/' . $vtid,
+                //'next_page' => 'fares/add/' . $rcode . '/' . $vtid,
+        );
+        if ($MemberID != NULL) {
+            $data['data'] = $this->usermodel->get_user($MemberID);
+        }
+        $data_debug = array(
+            'data' => $data['data'],
+        );
+
+        //$this->TemplateModel->set_Debug($data_debug);
+        $this->TemplateModel->set_Content('users/user_detail_view', $data);
+        $this->TemplateModel->ShowTemplate();
+    }
+
     public function add() {
         $data_debug = array();
         if ($this->usermodel->set_validation_form()) {

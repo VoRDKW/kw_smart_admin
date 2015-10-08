@@ -160,8 +160,10 @@ Class DatetimeModel extends CI_Model {
         }
     }
 
-    public function DateThai($strDate) {
+    public function DateThai($strDate = NULL) {
         if ($strDate == NULL) {
+            return $this->DateThaiToDay();
+        } elseif ($strDate == '0000-00-00') {
             return '-';
         } else {
             $str = explode('-', $strDate);

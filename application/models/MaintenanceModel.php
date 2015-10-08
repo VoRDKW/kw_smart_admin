@@ -5,114 +5,97 @@ if (!defined('BASEPATH'))
 
 Class MaintenanceModel extends CI_Model {
 
-    public function set_form_add() {
-        $i_JobName = array(
-            'name' => 'JobName',
-            'value' => set_value('JobName'),
-            'placeholder' => '',
-            'size' => '5',
-            'class' => 'form-control'
-        );
-        $i_BuildingID = array(
-            'name' => 'BuildingID',
-            'value' => set_value('BuildingID'),
-            'placeholder' => '',
-            'class' => 'form-control'
-        );
-        $i_RoomNo = array(
-            'name' => 'RoomNo',
-            'value' => set_value('RoomNo'),
-            'placeholder' => '',
-            'class' => 'form-control'
-        );
-        $i_Floor = array(
-            'name' => 'Floor',
-            'value' => set_value('Floor'),
-            'placeholder' => '',
-            'class' => 'form-control'
-        );
-        $i_NumberKWDevice = array(
-            'name' => 'NumberKWDevice',
-            'value' => set_value('NumberKwDevie'),
-            'placeholder' => '',
-            'class' => 'form-control'
-        );
-        $i_ImageName = array(
-            'name' => 'ImageName',
-            'type' => 'file',
-            'value' => set_value('ImageName'),
-            'placeholder' => '',
-            'class' => '',
-            'id' => 'files',
-            'multiple' => 'multiple'
-        );
-        $i_JobDetail = array(
-            'name' => 'JobDetail',
-            'value' => set_value('JobDetail'),
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('imagemodel');
+        $this->load->model('datetimemodel');
+    }
+
+    private $JobStatusID = 0;
+
+    public function set_JobStatus($JobStatusID) {
+        $this->JobStatusID = $JobStatusID;
+    }
+
+    public function update_job($JobID, $data) {
+        $data['UpdateDate'] = $this->datetimemodel->getDatetimeNow();
+        $data['UpdateBy'] = $this->session->userdata('MemberID');
+        $this->db->trans_begin();
+        $this->db->where('JobID', $JobID);
+        $this->db->update('tbm_jobs', $data);
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            $rs = FALSE;
+        } else {
+            $this->db->trans_commit();
+            //$this->uploadmodel->upload_multi_image('img_maintenance', 'ImageName', $job_id, 'job_has_image');
+            $rs = TRUE;
+        }
+        return $rs;
+    }
+
+    public function set_data_view($JobID = NULL) {
+        $rs = array();
+        $Jobs = $this->get_jobs();
+        foreach ($Jobs as $Job) {
+            $job_id = $Job['JobID'];
+            $Job['Images'] = $this->imagemodel->get_job_image($job_id);
+            $Job['CreateDate'] = $this->datetimemodel->DateTimeThai($Job['CreateDate']);
+            array_push($rs, $Job);
+        }
+        return $rs;
+    }
+
+    public function get_jobs($JobID = NULL) {
+        $this->db->select('*,tbm_jobs.Note as Note');
+        $this->db->join('tbm_room', 'tbm_room.RoomID=tbm_jobs.RoomID', 'LEFT');
+        $this->db->join('building_has_room', 'tbm_room.RoomID = building_has_room.RoomID', 'LEFT');
+        $this->db->join('tbm_building', 'tbm_building.BuildingID = building_has_room.BuildingID', 'LEFT');
+        $this->db->join('tbm_job_status', 'tbm_job_status.JobStatusID = tbm_jobs.JobStatusID', 'LEFT');
+        if ($JobID != NULL) {
+            $this->db->where('tbm_jobs.JobID', $JobID);
+        }
+        $query = $this->db->get('tbm_jobs');
+
+        if ($JobID == NULL) {
+            $rs = $query->result_array();
+        } else {
+            $rs = $query->row_array();
+        }
+        return $rs;
+    }
+
+    public function set_form_search() {
+        
+    }
+
+    public function set_form_job_prove($JobID) {
+        $i_SolveDetail = array(
+            'name' => 'SolveDetail',
+            'value' => set_value('SolveDetail'),
             'placeholder' => '',
             'rows' => '3',
             'class' => 'form-control'
         );
-        $i_Note = array(
-            'name' => 'Note',
-            'value' => set_value('Notes'),
-            'placeholder' => '',
-            'class' => 'form-control'
+        $form = array(
+            'form_open' => form_open('maintenance/prove/' . $JobID, array('class' => '', 'id' => 'frm_job_prove')),
+            'SolveDetail' => form_textarea($i_SolveDetail),
+            'form_close' => form_close()
         );
-        $form_add = array(
-            'form_open' => form_open('building/add/', array('class' => 'form-horizontal', 'id' => 'frm_building')),
-            'JobName' => form_input($i_JobName),
-            'BuildingID' => form_input($i_BuildingID),
-            'RoomNo' => form_input($i_RoomNo),
-            'Floor' => form_input($i_Floor),
-            'NumberKWDevice' => form_input($i_NumberKWDevice),
-            'ImageName' => form_input($i_ImageName),
-            'JobDetail' => form_textarea($i_JobDetail),
-            'Note' => form_input($i_Note),
-            'form_close' => form_close(),
-        );
-
-        return $form_add;
+        return $form;
     }
 
-    public function set_form_edit($data) {
-        
-//        $i_Destination = array(
-//            'name' => 'Destination',
-//            'placeholder' => 'ปลายทาง',
-//            'readonly' => '',
-//            'class' => 'form-control text-center',
-//            'value' => $desination
-//        );
-
-        $form_edit = array(
-            'form' => form_open('user/edit/', array('class' => 'form-horizontal', 'id' => 'form_user')),
-        );
-
-        return $form_edit;
-    }
-
-    public function get_post_form() {
+    public function get_post_form_job_prove() {
         $form_data = array(
-            "JobName" => $this->input->post('JobName'),
-            "RoomNo" => $this->input->post('RoomNo'),
-            "NumberKWDevice" => $this->input->post('NumberKWDevice'),
-            "ImageName" => $this->input->post('ImageName'),
-            "JobDetail" => $this->input->post('JobDetail'),
-            "Note" => $this->input->post('Note')
+            "SolveDetail" => $this->input->post('JobName'),
         );
         return $form_data;
     }
 
-    public function validate_form_maintenace() {
-        $this->form_validation->set_rules('JobName', 'หัวข้อ', 'trim|required');
-        $this->form_validation->set_rules('RoomNo', 'หมายเลขห้อง', 'trim|required');
-        $this->form_validation->set_rules('NumberKWDevice', 'เลขที่ กว.', 'trim|required');
-        $this->form_validation->set_rules('ImageName', 'รูปภาพ', 'trim|required');
-        $this->form_validation->set_rules('JobDetail', 'ปัญหาที่แจ้ง', 'trim|required');
-        $this->form_validation->set_rules('Note', 'หมายเหตุ', 'trim|required');
-
-        return TRUE;
+    public function validate_form_job_prove() {
+        $this->form_validation->set_rules('SolveDetail', 'ปัญหาที่แจ้ง', 'trim|required');
+        $rs = $this->form_validation->run();
+        return $rs;
     }
 
 }
