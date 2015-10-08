@@ -132,7 +132,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-user"></i> 
-                            <?= $UserLogin['Fname'] . '' . $UserLogin['Lname'] ?>
+                            <?= $UserLogin['Fname']?>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
@@ -159,9 +159,9 @@
                                 <li>
                                     <a href="<?= base_url('maintenance/') ?>">งานของฉัน</a>
                                 </li>
-                                <li>
+<!--                                <li>
                                     <a href="<?= base_url('maintenance/history') ?>">ประวัติซ่อมบำรุง</a>
-                                </li>
+                                </li>-->
                             </ul>
                         </li>
                          <li id="btnBuilding">

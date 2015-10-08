@@ -331,10 +331,11 @@ Class BuildingModel extends CI_Model {
             'name' => 'RoomNote',
             'value' => set_value('RoomNote'),
             'placeholder' => '',
+            'rows' => '3',
             'class' => 'form-control'
         );
         $form_add = array(
-            'form_open' => form_open("building/add_room/$BuildingID/$FloorNO", array('class' => 'form-inline', 'id' => 'frm_building')),
+            'form_open' => form_open("building/add_room/$BuildingID/$FloorNO", array('class' => 'form-horizontal', 'id' => 'frm_building')),
             'BuildingID' => form_input($i_BuildingNo),
             'BuildingName' => form_input($i_BuildingName),
             'Floor' => form_input($i_Floor),
@@ -398,10 +399,11 @@ Class BuildingModel extends CI_Model {
             'name' => 'RoomNote',
             'value' => $data['RoomNote'],
             'placeholder' => '',
+            'rows' => '3',
             'class' => 'form-control'
         );
         $form_add = array(
-            'form_open' => form_open("building/edit_room/$BuildingID/$RoomID", array('class' => 'form-inline', 'id' => 'frm_building')),
+            'form_open' => form_open("building/edit_room/$BuildingID/$RoomID", array('class' => 'form-horizontal', 'id' => 'frm_building')),
             'BuildingID' => form_input($i_BuildingNo),
             'BuildingName' => form_input($i_BuildingName),
             'Floor' => form_input($i_Floor),
@@ -433,8 +435,8 @@ Class BuildingModel extends CI_Model {
 
         $this->form_validation->set_rules('Floor', 'ชั้น', 'trim|required');
         $this->form_validation->set_rules('RoomNO', 'หมายเลขห้อง', 'trim|required');
-        $this->form_validation->set_rules('RoomName', 'ชื่อห้อง', 'trim|required');
-        $this->form_validation->set_rules('NumberSeat', 'จำนวนที่นั่ง', 'trim|required');
+//        $this->form_validation->set_rules('RoomName', 'ชื่อห้อง', 'trim|required');
+//        $this->form_validation->set_rules('NumberSeat', 'จำนวนที่นั่ง', 'trim|required');
         $this->form_validation->set_rules('RoomNote', 'อื่นๆ', 'trim');
 
         $rs = $this->form_validation->run();

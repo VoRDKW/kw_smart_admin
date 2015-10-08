@@ -20,54 +20,56 @@
     </div>
     <div class="row">
         <?= $form['form_open'] ?>
-        <div class="col-md-12">
-            <div class="form-inline">
-                <div class="form-group">
-                    <label>อาคาร</label>
+        <div class="col-md-offset-1 col-md-10">                
+            <div class="form-group">
+                <label class="col-sm-2 control-label <?= (form_error('BuildingID')) ? 'has-error' : '' ?>">อาคาร:</label>
+                <div class="col-sm-2">
                     <?= $form['BuildingID'] ?>
-                    <?php echo form_error('BuildingID', '<font color="error">', '</font>'); ?>
+                    <?php echo form_error('BuildingID', '<font color="error">', '</font>'); ?>   
                 </div>
-                <div class="form-group">
-                    <label>ชื่ออาคาร</label>
+                <label class="col-sm-2 control-label <?= (form_error('BuildingName')) ? 'has-error' : '' ?>">ชื่ออาคาร</label>
+                <div class="col-sm-2">
                     <?= $form['BuildingName'] ?>
                     <?php echo form_error('BuildingName', '<font color="error">', '</font>'); ?>
                 </div>
-                <div class="form-group">
-                    <label>ชั้น</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label <?= (form_error('Floor')) ? 'has-error' : '' ?>">ชั้น</label>
+                <div class="col-sm-2">
                     <?= $form['Floor'] ?>
                     <?php echo form_error('Floor', '<font color="error">', '</font>'); ?>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label>หมายเลขห้อง</label>
-                        <?= $form['RoomNO'] ?>
-                        <?php echo form_error('RoomNO', '<font color="error">', '</font>'); ?>
-                    </div>
-                    <div class="form-group">
-                        <label>ชื่อห้อง</label>
-                        <?= $form['RoomName'] ?>
-                        <?php echo form_error('RoomName', '<font color="error">', '</font>'); ?>
-                    </div>
-                    <div class="form-group">
-                        <label>จำนวนที่นั่ง</label>
-                        <?= $form['NumberSeat'] ?>
-                        <?php echo form_error('NumberSeat', '<font color="error">', '</font>'); ?>
-                    </div>
-                </div>           
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>อื่นๆ</label>
-                    <?= $form['RoomNote'] ?>
-                    <?php echo form_error('BuildingName', '<font color="error">', '</font>'); ?>
+                <label class="col-sm-2 control-label <?= (form_error('RoomNO')) ? 'has-error' : '' ?>">หมายเลขห้อง</label>
+                <div class="col-sm-2">
+                    <?= $form['RoomNO'] ?>
+                    <?php echo form_error('RoomNO', '<font color="error">', '</font>'); ?>           
                 </div>
+            </div> 
+            <div class="form-group">
+                <label class="col-sm-2 control-label <?= (form_error('RoomName')) ? 'has-error' : '' ?>">ชื่อห้อง</label>
+                <div class="col-sm-2">
+                    <?= $form['RoomName'] ?>
+                    <?php echo form_error('RoomName', '<font color="error">', '</font>'); ?>
+                </div>  
+                <label class="col-sm-2 control-label <?= (form_error('NumberSeat')) ? 'has-error' : '' ?>">จำนวนที่นั่ง</label>
+                <div class="col-sm-2">
+                    <?= $form['NumberSeat'] ?>
+                    <?php echo form_error('NumberSeat', '<font color="error">', '</font>'); ?>
+                </div>                       
             </div>
-            <div class="col-md-12 center">
-                <button  type="submit" class="btn btn-success"><i class="fa fa-save fa-lg"></i>&nbsp;บันทึก</button>
-                <a href="<?= base_url("building") ?>" type="reset" class="btn btn-danger"><i class="fa fa-times fa-lg"></i>&nbsp;ยกเลิก</a>
+            <div class="form-group">
+                <label class="col-sm-2 control-label <?= (form_error('RoomNote')) ? 'has-error' : '' ?>">อื่นๆ</label>
+                <div class="col-sm-6">
+                    <?= $form['RoomNote'] ?>
+                    <?php echo form_error('RoomNote', '<font color="error">', '</font>'); ?>
+                </div>                    
             </div>
-            <?= $form['form_close'] ?>
         </div>
+    </div><hr/>        
+    <div class="col-md-12 center">
+        <button  type="submit" class="btn btn-success"><i class="fa fa-save fa-lg"></i>&nbsp;บันทึก</button>
+        <a href="<?= base_url("building") ?>" type="reset" class="btn btn-danger"><i class="fa fa-times fa-lg"></i>&nbsp;ยกเลิก</a>
     </div>
+    <?= $form['form_close'] ?>
+</div>
+</div>

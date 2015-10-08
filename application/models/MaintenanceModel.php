@@ -49,6 +49,7 @@ Class MaintenanceModel extends CI_Model {
             $Job['CreateDate'] = $this->datetimemodel->DateTimeThai($Job['CreateDate']);
             array_push($rs, $Job);
         }
+        $rs = array_reverse($rs, true);
         return $rs;
     }
 
@@ -126,7 +127,7 @@ Class MaintenanceModel extends CI_Model {
     }
 
     public function validate_form_job_prove() {
-        $this->form_validation->set_rules('SolveDetail', 'ปัญหาที่แจ้ง', 'trim|required');
+        $this->form_validation->set_rules('SolveDetail', 'รายละเอียดการแก้ปัญหา', 'trim|required');
         $rs = $this->form_validation->run();
         return $rs;
     }
